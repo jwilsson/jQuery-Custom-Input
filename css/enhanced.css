@@ -9,7 +9,7 @@ legend { font-size:1.4em; font-weight:bold; padding:.2em 5px; }
 .custom-checkbox,.custom-radio { position:relative; }
 
 /* input, label positioning */
-.custom-checkbox input,.custom-radio input { position:absolute; left:2px; top:2px; margin:0; }
+.custom-checkbox input,.custom-radio input { position:absolute; left:4px; top:4px; margin:0; }
 .custom-checkbox label,.custom-radio label { display:block; position:relative; font-size:1.3em; padding-right:1em; line-height:1; padding:.5em 0 .5em 30px; margin:0 0 .3em; cursor:pointer; }
 
 /* states */
