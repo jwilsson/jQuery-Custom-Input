@@ -7,12 +7,14 @@
  * licensed under MIT (filamentgroup.com/examples/mit-license.txt)
  * --------------------------------------------------------------------
  */
+/*global jQuery, $ */
 (function ($) {
+    'use strict';
 	$.fn.customInput = function () {
 		return $(this).each(function () {
-			if ($(this).is("[type=checkbox], [type=radio]")) {
+			if ($(this).is('[type="checkbox"],[type="radio"]') && !$(this).parent().is('[class^="custom"]')) {
 				var input = $(this),
-					label = $('label[for="' + input.attr('id') + '"]'); // Get the associated label using the input"s id
+					label = $('label[for="' + input.attr("id") + '"]'); // Get the associated label using the input's id
 
 				// Wrap the input + label in a div
 				input.add(label).wrapAll('<div class="custom-' + input.attr("type") + '"></div>');
@@ -28,7 +30,6 @@
 					$('input[name="' + $(this).attr('name') + '"]').trigger("updateState");
 				}).focus(function () {
 					label.addClass("focus");
-
 					if (input.is(":checked")) {
 						$(this).addClass("checkedFocus");
 					}
