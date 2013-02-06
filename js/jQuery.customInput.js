@@ -9,36 +9,40 @@
  */
 /*global jQuery, $ */
 (function ($) {
-    'use strict';
+	'use strict';
+
 	$.fn.customInput = function () {
-		return $(this).each(function () {
-			if ($(this).is('[type="checkbox"],[type="radio"]') && !$(this).parent().is('[class^="custom"]')) {
-				var input = $(this),
-					label = $('label[for="' + input.attr("id") + '"]'); // Get the associated label using the input's id
+		return this.each(function () {
+			var $_this = $(this),
+				label;
+
+			if ($_this.is('[type=checkbox], [type=radio]') && !$_this.parent().is('[class^=custom]')) {
+				label = $('label[for=' + $_this.attr('id') + ']'); // Get the associated label using the input's id
 
 				// Wrap the input + label in a div
-				input.add(label).wrapAll('<div class="custom-' + input.attr("type") + '"></div>');
+				$_this.add(label).wrapAll('<div class="custom-' + $_this.attr('type') + '"></div>');
 
 				// Bind custom event, trigger it, bind click,focus,blur events
-				input.bind("updateState", function () {
-					if (input.is(":checked")) {
-						label.addClass("checked");
+				$_this.bind('updateState', function () {
+					if ($_this.is(':checked')) {
+						label.addClass('checked');
 					} else {
-						label.removeClass("checked checkedHover checkedFocus");
+						label.removeClass('checked checkedHover checkedFocus');
 					}
-				}).trigger("updateState").click(function () {
-					$('input[name="' + $(this).attr('name') + '"]').trigger("updateState");
+				}).trigger('updateState').click(function () {
+					$('input[name="' + $_this.attr('name') + '"]').trigger('updateState'); // [name] is wrapped in double quotes to work with arrays of inputs where name is "foo[]"
 				}).focus(function () {
-					label.addClass("focus");
-					if (input.is(":checked")) {
-						$(this).addClass("checkedFocus");
+					label.addClass('focus');
+
+					if ($_this.is(':checked')) {
+						$_this.addClass('checkedFocus');
 					}
 				}).blur(function () {
-					label.removeClass("focus checkedFocus");
+					label.removeClass('focus checkedFocus');
 				});
 
 				// Attach disabled class to disabled input
-				label.toggleClass("disabled", this.disabled);
+				label.toggleClass('disabled', this.disabled);
 			}
 		});
 	};
